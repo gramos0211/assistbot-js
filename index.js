@@ -1,25 +1,32 @@
 require('dotenv').config(); //initialize dotenv
-const { Client, Intents } = require('discord.js'); //import discord.js
+const fs = require('node:fs');
+const { Client, Collection, Intents } = require('discord.js'); //import discord.js
+const token = process.env.CLIENT_TOKEN;
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] }); //create new client
 
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
-});
+// retrieve command file 
+client.commands = new Collection();
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
-client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+for (const file of commandFiles) {
+	const command = require(`./commands/${file}`);
+	// Set a new item in the Collection
+	// With the key as the command name and the value as the exported module
+	client.commands.set(command.data.name, command);
+}
 
-	const { commandName } = interaction;
+// retrieve event files
+const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 
-	if (commandName === 'ping') {
-		await interaction.reply('Pong!');
-	} else if (commandName === 'server') {
-		await interaction.reply(`Server info: ${interaction.guild.name}\nTotal Members: ${interaction.guild.memberCount}`);
-	} else if (commandName === 'user') {
-		await interaction.reply(`Your tag: ${interaction.user.tag}\nYour id: ${interaction.user.id}`);
+for (const file of eventFiles) {
+	const event = require(`./events/${file}`);
+	if (event.once) {
+		client.once(event.name, (...args) => event.execute(...args));
+	} else {
+		client.on(event.name, (...args) => event.execute(...args));
 	}
-});
+}
 
 //make sure this line is the last line
-client.login(process.env.CLIENT_TOKEN); //login bot using token
+client.login(token); 
