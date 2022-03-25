@@ -20,14 +20,14 @@ module.exports = {
             .catch(error => console.log(error))
             
 
-            const embed = new MessageEmbed()
-                    .setColor("#707070")
-                    .setTitle(nasaData['title'])
-                    .setAuthor({name: nasaData["copyright"]})
-                    .setDescription(`Date: ${nasaData["date"]}\n${nasaData["explanation"]}`)
-                    .setImage(nasaData["url"])
-                    .setThumbnail(nasaData["url"]);
-            await interaction.reply({ embeds: [embed] })
+        const embed = new MessageEmbed()
+                .setColor("#707070")
+                .setTitle(nasaData['title'])
+                .setAuthor({name: nasaData["copyright"]})
+                .setDescription(`Date: ${nasaData["date"]}\n${nasaData["explanation"]}`)
+                .setImage(nasaData["url"])
+                .setThumbnail(nasaData["url"]);
+        await interaction.reply({ embeds: [embed] })
         
 	},
 };
