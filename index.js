@@ -3,7 +3,7 @@ const fs = require('node:fs');
 const { Client, Collection, Intents } = require('discord.js'); //import discord.js
 const token = process.env.CLIENT_TOKEN;
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] }); //create new client
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] }); //create new client
 
 // retrieve command file 
 client.commands = new Collection();
