@@ -10,7 +10,7 @@ module.exports = {
 		.setDescription('A friend-shaped command!'),
 	async execute(interaction) {
 		let chosenFile = animalPics[Math.floor(Math.random() * animalPics.length)];
-        const attachment = new MessageAttachment(`./assets/animal-pics/${chosenFile}`);
+        const attachment = new MessageAttachment(`./assets/Snom/${chosenFile}`);
 		await interaction.reply({ files: [attachment]});
 	},
 };
