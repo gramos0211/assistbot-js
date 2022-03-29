@@ -2,6 +2,7 @@ require('dotenv').config(); //initialize dotenv
 const fs = require('node:fs');
 const { Client, Collection, Intents } = require('discord.js'); //import discord.js
 const token = process.env.CLIENT_TOKEN;
+const http = require('http');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] }); //create new client
 
@@ -28,5 +29,13 @@ for (const file of eventFiles) {
 	}
 }
 
-//make sure this line is the last line
+const requestListener = function (req, res) {
+  res.writeHead(200);
+  res.end('Hello, World!');
+}
+
+const server = http.createServer(requestListener);
+server.listen(8080);
+
+
 client.login(token); 
