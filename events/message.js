@@ -23,7 +23,7 @@ module.exports = {
             msgChannel.send("ඞ")
         }
 
-        if (cleanMsg.includes("luz") || cleanMsg.includes("power")){
+        if (cleanMsg.includes("luz") || cleanMsg.includes("power") || cleanMsg.includes("luma")){
             const noLuzImg = new MessageAttachment(`./assets/no-luz.png`);
             msgChannel.send({files: [noLuzImg] })
         }
