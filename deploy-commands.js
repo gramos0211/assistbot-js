@@ -1,6 +1,5 @@
 // file should be ran whenever we update or create new slash commands
 
-const { SlashCommandBuilder } = require('@discordjs/builders');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 require('dotenv').config();
