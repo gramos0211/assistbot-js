@@ -11,6 +11,8 @@ module.exports = {
 	async execute(interaction) {
 		let chosenFile = animalPics[Math.floor(Math.random() * animalPics.length)];
         const attachment = new MessageAttachment(`./assets/animal-pics/${chosenFile}`);
+
+		console.log(`${interaction.user.tag} requested to view a random animal`);
 		await interaction.reply({ files: [attachment]});
 	},
 };

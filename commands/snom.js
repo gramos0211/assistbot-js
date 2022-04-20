@@ -11,6 +11,8 @@ module.exports = {
 	async execute(interaction) {
 		let chosenFile = animalPics[Math.floor(Math.random() * animalPics.length)];
         const attachment = new MessageAttachment(`./assets/Snom/${chosenFile}`);
+
+		console.log(`${interaction.user.tag} requested to witness the friend-shaped pokemon`);
 		await interaction.reply({ files: [attachment]});
 	},
 };

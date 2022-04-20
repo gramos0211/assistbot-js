@@ -14,7 +14,7 @@ module.exports = {
         await fetch(nasaURL+NASA_KEY)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
+                console.log(`NASA API data succesfully retrieved`);
                 nasaData=data;
             })
             .catch(error => console.log(error))
@@ -26,6 +26,8 @@ module.exports = {
                 .setDescription(`Date: ${nasaData["date"]}\n${nasaData["explanation"]}`)
                 .setImage(nasaData["url"])
                 .setThumbnail(nasaData["url"]);
+        
+        console.log(`${interaction.user.tag} requested a NASA pic`);
         await interaction.reply({ embeds: [embed] })
         
 	},

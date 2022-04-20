@@ -23,6 +23,7 @@ module.exports = {
             )
         }
 
+        console.log(`${interaction.user.tag} asked for help`);
         await interaction.reply({ embeds: [embeddedHelpMsg] })
 	},
 };

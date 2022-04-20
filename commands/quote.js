@@ -11,11 +11,13 @@ module.exports = {
         await fetch(quoteURL)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
+                console.log('Quote API data successfully retrieved');
                 quote_text = data[0]['q'];
                 quote_author = data[0]['a'];
             })
             .catch(error => console.log(error))
+        
+        console.log(`${interaction.user.tag} requested a quote`);
 		await interaction.reply(`"${quote_text}" -${quote_author}`);
 	},
 };

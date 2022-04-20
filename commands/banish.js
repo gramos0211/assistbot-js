@@ -37,19 +37,18 @@ module.exports = {
 			.setTitle(`Banished to horny jail!`)
 			.setDescription(`${user} will return in ${duration} minutes`)
 			.setImage(`https://pbs.twimg.com/media/EnhcMHsUwAw0PFy.jpg`);
-		
-		
-		console.log(interaction.guild.me.permissions.has(Permissions.FLAGS.MODERATE_MEMBERS));
 
 		try {
 			await member.send({embeds: [memberMsg]});
 			await member.send({files: [attachment]});
+			console.log(`Sent DM's to ${user}`)
 		} catch (error) {
 			console.log(error);
 		}
 
 		try {
-			await member.timeout((duration*60*1000), "Banished for transgressions of the horny nature");
+			await member.timeout((duration*60*1000), "Banished for transgressions of excessive horny nature");
+			console.log(`${user} was banished by ${interaction.user.tag}`);
 			await interaction.reply({embeds: [serverMsg]});
 		} catch (error) {
 			console.log(error)
